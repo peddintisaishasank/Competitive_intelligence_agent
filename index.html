@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Competitive Intelligence Agent — Real-time competitor monitoring, activity tracking, and AI-powered market insights." />
+  <title>CI Agent · Competitive Intelligence Dashboard</title>
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ── Top Header ─────────────────────────────────────────── -->
+  <header class="top-header">
+    <div class="top-header__logo">
+      <div class="logo-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" width="18" height="18">
+          <path d="M12 2L15.5 9H22L16.8 13.5L19 21L12 17L5 21L7.2 13.5L2 9H8.5L12 2Z"
+            fill="white" stroke="rgba(255,255,255,0.3)" stroke-width="0.5"/>
+        </svg>
+      </div>
+      <span class="logo-text">CI<span>Agent</span></span>
+    </div>
+
+    <div class="top-header__search">
+      <div class="search-input-wrap" role="search">
+        <svg viewBox="0 0 16 16" fill="none" width="14" height="14" color="var(--color-text-faint)">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input type="search" placeholder="Search competitors, events…" aria-label="Search competitors and events" id="global-search" />
+        <kbd style="font-size:0.65rem;color:var(--color-text-faint);background:var(--color-surface-3);border:1px solid var(--color-border);padding:1px 6px;border-radius:4px;">⌘K</kbd>
+      </div>
+    </div>
+
+    <div class="top-header__right">
+      <!-- Data source status indicator -->
+      <div class="ai-status-indicator" id="db-status-indicator" title="Data source status">
+        <span class="status-dot status-dot--mock" id="db-status-dot"></span>
+        <span id="db-status-label">Mock Data</span>
+      </div>
+
+      <button class="icon-btn" title="Notifications" id="btn-notifications" aria-label="Notifications">
+        <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+          <path d="M8 1.5a4.5 4.5 0 00-4.5 4.5c0 4.5-2 5.5-2 5.5h13s-2-1-2-5.5A4.5 4.5 0 008 1.5z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M9.3 13a1.5 1.5 0 01-2.6 0" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        <span class="notif-dot" aria-hidden="true"></span>
+      </button>
+
+      <button class="icon-btn" title="Settings" id="btn-settings" aria-label="Settings">
+        <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+          <circle cx="8" cy="8" r="2.5" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M8 1v2M8 13v2M1 8h2M13 8h2M3.05 3.05l1.42 1.42M11.53 11.53l1.42 1.42M11.53 4.47l1.42-1.42M3.05 12.95l1.42-1.42" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <button class="icon-btn" title="Open navigation" id="menu-toggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 16 16" fill="none" width="16" height="16">
+          <path d="M2 4h12M2 8h12M2 12h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <div class="user-avatar" title="Account" role="button" tabindex="0" aria-label="User account">RP</div>
+    </div>
+  </header>
+
+
+  <!-- ── Sidebar ────────────────────────────────────────────── -->
+  <nav class="sidebar" id="sidebar" aria-label="Main navigation">
+    <div class="sidebar-section">
+      <div class="sidebar-label">Overview</div>
+      <button class="nav-link active" data-section="section-kpi">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <rect x="1" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="9" y="1" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="1" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="9" y="9" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        Dashboard
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Intelligence</div>
+      <button class="nav-link" data-section="section-competitors">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M10.5 14v-1.5a3 3 0 00-3-3h-4a3 3 0 00-3 3V14" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          <circle cx="5.5" cy="5" r="3" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M14 14v-1.5a3 3 0 00-2-2.83M11 2.17a3 3 0 010 5.66" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+        Competitors
+      </button>
+
+      <button class="nav-link" data-section="section-activity">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M1 8h2.5l2-5 3 9 2-4H15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Activity Feed
+        <span class="nav-badge">6</span>
+      </button>
+
+      <button class="nav-link" data-section="section-categories">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <rect x="1" y="8" width="3" height="7" rx="1" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="6" y="5" width="3" height="10" rx="1" stroke="currentColor" stroke-width="1.3"/>
+          <rect x="11" y="2" width="3" height="13" rx="1" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        Categories
+      </button>
+
+      <button class="nav-link" data-section="section-insights">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M8 1L10 6H15L11 9.5L12.5 14.5L8 11.5L3.5 14.5L5 9.5L1 6H6L8 1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+        </svg>
+        AI Insights
+        <span class="nav-badge">3</span>
+      </button>
+
+      <button class="nav-link" data-section="section-trends">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M2 13l4-5 3 3 5-7M10 4h4v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Competitive Trends
+        <span class="nav-badge" style="background:#6366f1;">P10</span>
+      </button>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-label">Tools</div>
+      <button class="nav-link" disabled style="opacity:0.4;cursor:not-allowed">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M2 12l4-4 3 3 5-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Analytics
+      </button>
+      <button class="nav-link" id="sidebar-add-competitor">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        Add Competitor
+      </button>
+      <button class="nav-link" disabled style="opacity:0.4;cursor:not-allowed">
+        <svg viewBox="0 0 16 16" fill="none" width="15" height="15">
+          <path d="M13 5H3a2 2 0 00-2 2v4a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2z" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M5 5V4a2 2 0 014 0v1" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        Alerts
+      </button>
+    </div>
+
+    <div class="sidebar__footer">
+      <div class="sidebar-user" tabindex="0" role="button" aria-label="User profile">
+        <div class="user-avatar" aria-hidden="true">RP</div>
+        <div class="sidebar-user__info">
+          <div class="name">Raj Peddinti</div>
+          <div class="role">Strategy Lead</div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── Main Content ────────────────────────────────────────── -->
+  <main class="main-content" id="main-content">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Competitive Intelligence</h1>
+        <p class="page-subtitle">Real-time monitoring · AI-powered insights · Mock data mode</p>
+      </div>
+      <div class="page-actions">
+        <button class="btn-ghost" id="btn-export">
+          <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+            <path d="M8 1v8M5 6l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 12h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          Export
+        </button>
+        <button class="btn-primary" id="btn-refresh">
+          <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+            <path d="M14 8A6 6 0 112 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M14 4v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Refresh
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Summary -->
+    <section class="dashboard-section" id="section-kpi" aria-label="Key Performance Indicators">
+      <div id="kpi-container"></div>
+    </section>
+
+    <!-- Tracked Competitors -->
+    <section class="dashboard-section panel" id="section-competitors" aria-label="Tracked Competitors">
+      <div id="competitors-container"></div>
+    </section>
+
+    <!-- ── Main Dashboard Grid ─────────────────────────────────── -->
+    <div class="dashboard-grid">
+      <!-- LEFT / MAIN COLUMN -->
+      <div class="dashboard-grid__main">
+        <!-- Recent Competitor Activity -->
+        <section class="dashboard-section panel" id="section-activity" aria-label="Recent Competitor Activity">
+          <div id="activity-container"></div>
+        </section>
+
+        <!-- Competitive Trends (Phase 10) -->
+        <section class="dashboard-section panel" id="section-trends" aria-label="Competitive Trends">
+          <div id="trends-container"></div>
+        </section>
+      </div>
+
+      <!-- RIGHT / SIDE COLUMN -->
+      <div class="dashboard-grid__side">
+        <!-- Quick Actions Panel -->
+        <section class="dashboard-section panel" id="section-quick-actions" aria-label="Quick Actions">
+          <div class="section-header section-header--compact">
+            <div>
+              <h2 class="section-title">Quick Actions</h2>
+              <p class="section-subtitle">Common operations & shortcuts</p>
+            </div>
+          </div>
+          <div class="quick-actions-grid">
+            <button class="quick-action-btn" id="qa-add-competitor" title="Add a new competitor">
+              <span class="qa-icon">➕</span>
+              <span class="qa-label">Add Competitor</span>
+            </button>
+            <button class="quick-action-btn" id="qa-sync-memory" title="Sync events to Hindsight memory">
+              <span class="qa-icon">🧠</span>
+              <span class="qa-label">Sync Memory</span>
+            </button>
+            <button class="quick-action-btn" id="qa-export-csv" title="Export events to CSV">
+              <span class="qa-icon">📥</span>
+              <span class="qa-label">Export CSV</span>
+            </button>
+            <button class="quick-action-btn" id="qa-refresh-data" title="Refresh dashboard data">
+              <span class="qa-icon">🔄</span>
+              <span class="qa-label">Refresh Data</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- AI Insights -->
+        <section class="dashboard-section panel" id="section-insights" aria-label="AI-Generated Insights">
+          <div id="insights-container"></div>
+        </section>
+
+        <!-- Activity Categories -->
+        <section class="dashboard-section panel" id="section-categories" aria-label="Activity Category Breakdown">
+          <div id="categories-container"></div>
+        </section>
+      </div>
+    </div>
+
+    <!-- ── Full-Width Competitive Intelligence Agent Section ──────── -->
+    <section class="dashboard-section panel agent-panel-full" id="section-memory" aria-label="Competitive Intelligence Agent">
+      <div id="memory-container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">
+              <span class="ai-badge-inline" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4)">AGENT</span>
+              Competitive Intelligence Agent
+            </h2>
+            <p class="section-subtitle" id="memory-subtitle">Investigate competitor moves, strategic patterns, and timeline shifts using Hindsight persistent memory</p>
+          </div>
+          <div class="section-actions">
+            <div class="ai-status-indicator" id="hindsight-status-indicator">
+              <span class="status-dot status-dot--mock" id="hindsight-status-dot"></span>
+              <span id="hindsight-status-label">Checking…</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agent Query input -->
+        <div class="memory-query-wrap">
+          <div class="memory-query-input-row">
+            <input
+              type="text"
+              id="memory-query-input"
+              class="ci-form-input memory-query-input"
+              placeholder="Ask the Agent: e.g. What patterns do you see in AgroTech AI? Compare AgroTech AI and FarmVision..."
+              aria-label="Agent Question"
+            />
+            <button class="btn-primary" id="btn-ask-agent" aria-label="Ask Agent">
+              <svg viewBox="0 0 16 16" fill="none" width="13" height="13">
+                <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              Ask Agent
+            </button>
+          </div>
+          <div class="memory-query-meta-row">
+            <div class="memory-quick-queries">
+              <span class="memory-quick-label">Try:</span>
+              <button class="memory-quick-btn" data-query="What has AgroTech AI done recently?">AgroTech AI recent</button>
+              <button class="memory-quick-btn" data-query="What product launches has AgroTech AI had?">Product launches</button>
+              <button class="memory-quick-btn" data-query="What pricing changes has AgroTech AI made?">Pricing changes</button>
+              <button class="memory-quick-btn" data-query="What patterns do you see in AgroTech AI's activity?">Activity patterns</button>
+              <button class="memory-quick-btn" data-query="Compare AgroTech AI and FarmVision over the past six months.">Compare competitors</button>
+            </div>
+            <!-- Sync button for existing events -->
+            <div class="memory-sync-row">
+              <button class="btn-ghost btn-sm" id="btn-sync-hindsight">
+                <svg viewBox="0 0 16 16" fill="none" width="12" height="12">
+                  <path d="M14 8A6 6 0 112 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  <path d="M14 4v4h-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Sync Events to Memory
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results area -->
+        <div id="memory-results" class="agent-results"></div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
+

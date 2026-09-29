@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>AgroTech AI Official Press &amp; Announcements</title>
+    <link>https://example.com/agrotech</link>
+    <description>Latest news, product releases, partnerships, and market updates from AgroTech AI</description>
+    <language>en-us</language>
+    <item>
+      <title>AgroTech AI Launches Next-Gen Autonomous Drone Crop Scouting Platform</title>
+      <link>https://example.com/agrotech/news/drone-crop-scouting-2026</link>
+      <pubDate>Mon, 22 Sep 2026 14:00:00 +0000</pubDate>
+      <guid>agrotech-drone-scout-20260922</guid>
+      <description>AgroTech AI today announced the general availability of its Autonomous Drone Crop Scouting Platform, featuring real-time multispectral imaging and automated pest detection models for commercial wheat and corn growers.</description>
+    </item>
+    <item>
+      <title>AgroTech AI Enters Strategic Partnership with John Deere for Cloud Telemetry</title>
+      <link>https://example.com/agrotech/news/deere-telemetry-partnership</link>
+      <pubDate>Fri, 18 Sep 2026 09:30:00 +0000</pubDate>
+      <guid>agrotech-deere-partnership-20260918</guid>
+      <description>AgroTech AI has signed a multi-year global partnership agreement with agricultural equipment manufacturer John Deere to integrate precision yield analytics directly into tractor telematics consoles.</description>
+    </item>
+    <item>
+      <title>General European Weather and Grain Commodity Report</title>
+      <link>https://example.com/news/commodity-grain-market-2026</link>
+      <pubDate>Wed, 16 Sep 2026 12:00:00 +0000</pubDate>
+      <guid>generic-grain-report-20260916</guid>
+      <description>Global wheat futures experienced moderate volatility following revised harvest forecasts across Western Europe, with export volumes expected to remain flat through the final quarter.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>FarmVision Press Room &amp; Product Updates</title>
+    <link>https://example.com/farmvision</link>
+    <description>Official announcements, product milestones, and pricing news from FarmVision</description>
+    <language>en-us</language>
+    <item>
+      <title>FarmVision Unveils Edge AI Sensor for Greenhouse Climate Optimization</title>
+      <link>https://example.com/farmvision/news/edge-sensor-greenhouse-2026</link>
+      <pubDate>Thu, 25 Sep 2026 11:00:00 +0000</pubDate>
+      <guid>farmvision-edge-sensor-20260925</guid>
+      <description>FarmVision announced the release of its specialized Edge AI microclimate sensor, delivering sub-degree temperature regulation and automated CO2 dosing for indoor commercial growers.</description>
+    </item>
+    <item>
+      <title>FarmVision Introduces Flexible Pay-Per-Acre Subscription Pricing Tier</title>
+      <link>https://example.com/farmvision/news/pricing-update-sept-2026</link>
+      <pubDate>Mon, 22 Sep 2026 15:30:00 +0000</pubDate>
+      <guid>farmvision-pricing-tier-20260922</guid>
+      <description>FarmVision has revamped its enterprise pricing structure, launching a low-entry pay-per-acre subscription model designed to reduce upfront capital hurdles for mid-sized family farms.</description>
+    </item>
+    <item>
+      <title>Global Agricultural Fertilizer Logistics and Rail Freight Overview</title>
+      <link>https://example.com/news/fertilizer-rail-freight-report</link>
+      <pubDate>Tue, 15 Sep 2026 08:00:00 +0000</pubDate>
+      <guid>generic-fertilizer-rail-20260915</guid>
+      <description>North American rail car availability for potash and nitrogen shipments improved 4% week-over-week as regional transit hubs cleared backlog.</description>
+    </item>
+  </channel>
+</rss>

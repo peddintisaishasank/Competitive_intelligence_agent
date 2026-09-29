@@ -1,0 +1,23 @@
+{
+  "name": "competitive-intelligence-agent",
+  "version": "1.0.0",
+  "description": "Competitive Intelligence Agent — Hackathon project with Hindsight memory integration",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "demo": "node seed-hindsight-demo.js",
+    "sync": "node -e \"import('./services/hindsight.js').then(m=>m.syncExistingEventsToHindsight()).then(console.log)\""
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.117.2",
+    "@vectorize-io/hindsight-client": "^0.10.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
